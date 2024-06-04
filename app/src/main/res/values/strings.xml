@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NutriX</string>
+    <string name="app_tagline">Your Daily Nutrition Tracker</string>
 </resources>

@@ -17,30 +17,83 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.app.AlertDialog
+import android.graphics.Color
+import android.view.View
+import android.widget.TextView
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_SELECT = 2
     private val REQUEST_CAMERA_PERMISSION = 100
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressKarbo = findViewById<ProgressBar>(R.id.progress_karbohidrat)
-        val progressProtein = findViewById<ProgressBar>(R.id.progress_protein)
-        val progressLemak = findViewById<ProgressBar>(R.id.progress_lemak)
-        val progressVitamin = findViewById<ProgressBar>(R.id.progress_vitamin)
-        val progressMineral = findViewById<ProgressBar>(R.id.progress_mineral)
+        val progressKarbo = findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+        val progressProtein = findViewById<CircularProgressBar>(R.id.progress_protein)
+        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
+        val progressVitamin = findViewById<CircularProgressBar>(R.id.progress_vitamin)
+        val progressMineral = findViewById<CircularProgressBar>(R.id.progress_mineral)
         val btnUploadImage = findViewById<Button>(R.id.btn_upload_image)
+        val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
+        val txtResponse = findViewById<TextView>(R.id.txt_response)
+        val btnRecomendation = findViewById<Button>(R.id.btn_recomendation)
 
-        progressKarbo.progress = 50
-        progressProtein.progress = 70
-        progressLemak.progress = 30
-        progressVitamin.progress = 90
-        progressMineral.progress = 45
+        progressKarbo.apply {
+            setProgressWithAnimation(65f, 3000) // =1s
 
+            progressMax = 100f
+            // Other
+            roundBorder = true
+            startAngle = 180f
+            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+        }
 
+        progressProtein.apply {
+            setProgressWithAnimation(90f, 3000) // =1s
+
+            progressMax = 100f
+            // Other
+            roundBorder = true
+            startAngle = 180f
+            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+        }
+
+        progressLemak.apply {
+
+            setProgressWithAnimation(30f, 3000) // =1s
+
+            progressMax = 100f
+            // Other
+            roundBorder = true
+            startAngle = 180f
+            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+        }
+
+        progressVitamin.apply {
+            setProgressWithAnimation(50f, 3000) // =1s
+
+            progressMax = 100f
+            // Other
+            roundBorder = true
+            startAngle = 180f
+            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+        }
+
+        progressMineral.apply {
+            setProgressWithAnimation(80f, 3000) // =1s
+
+            progressMax = 100f
+            // Other
+            roundBorder = true
+            startAngle = 180f
+            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
+        }
         btnUploadImage.setOnClickListener {
             val options = arrayOf("Take Photo", "Choose from Gallery")
             val builder = android.app.AlertDialog.Builder(this)
@@ -52,6 +105,32 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             builder.show()
+        }
+
+        btnAnalyze.setOnClickListener {
+            val text = "Makanan kamu ******** nutrisi yang terkandung di makanan tsb adalah sebagai berikut, DATA NA MANA GERRY KOCAKK"
+
+            txtResponse.text = text
+            txtResponse.visibility = View.VISIBLE
+
+        }
+
+        btnRecomendation.setOnClickListener{
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            alertDialogBuilder.apply {
+                setTitle("Recommendation")
+                setMessage("Gilang ganteng.")
+                setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss() // Menutup dialog
+                }
+                setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss() // Menutup dialog
+                }
+            }
+
+            // Membuat dialog dan menampilkannya
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
         }
     }
 
@@ -84,10 +163,17 @@ class MainActivity : AppCompatActivity() {
             val bitmap = data?.extras?.get("data") as Bitmap
             val imgView = findViewById<ImageView>(R.id.img_view)
             imgView.setImageBitmap(bitmap)
+            imgView.visibility = View.VISIBLE
+
+            val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
+            btnAnalyze.visibility = View.VISIBLE
         } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == Activity.RESULT_OK) {
             val uri = data?.data
             val imgView = findViewById<ImageView>(R.id.img_view)
             imgView.setImageURI(uri)
+            imgView.visibility = View.VISIBLE
+            val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
+            btnAnalyze.visibility = View.VISIBLE
         }
     }
 

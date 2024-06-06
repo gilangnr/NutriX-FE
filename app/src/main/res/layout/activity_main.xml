@@ -5,16 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <FrameLayout
+            android:id="@+id/layout_jumbotron"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="4dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/jumbotron"/>
+        </FrameLayout>
+
 
         <RelativeLayout
             android:id="@+id/layout_img"
+            android:layout_below="@id/layout_jumbotron"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -49,7 +61,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="fitCenter"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_analyze"
@@ -58,7 +70,7 @@
                 android:layout_below="@id/img_view"
                 android:layout_centerHorizontal="true"
                 android:text="Analyze My Food"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txt_response"
@@ -67,7 +79,6 @@
                 android:layout_below="@id/btn_analyze"
                 android:layout_margin="16dp"
                 android:visibility="gone" />
-
         </RelativeLayout>
 
 
@@ -87,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_nutrition_track"
+            android:scrollbars="none"
             android:layout_marginTop="16dp">
 
             <LinearLayout

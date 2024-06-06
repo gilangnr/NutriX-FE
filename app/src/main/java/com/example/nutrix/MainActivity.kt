@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity() {
 
             // Membuat dialog dan menampilkannya
             val alertDialog = alertDialogBuilder.create()
+
             alertDialog.show()
         }
     }

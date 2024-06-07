@@ -20,7 +20,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/jumbotron"/>
+                android:src="@drawable/landscape2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDark"
+                android:text="Jangan lupa makan makanan bergizi 😊"
+                android:elevation="10dp"
+                android:padding="6dp"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"
+                android:layout_margin="16dp"/>
         </FrameLayout>
 
 
@@ -50,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/txt_eat_main"
                 android:layout_toEndOf="@id/txt_eat_main"
+                android:backgroundTint="@color/colorDark"
                 android:drawableEnd="@drawable/baseline_camera_24"
                 android:text="Take a Picture" />
 
@@ -273,6 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:backgroundTint="@color/colorDark"
                 android:drawableEnd="@drawable/baseline_fastfood_24"
                 android:text="Recomendation Food " />
 

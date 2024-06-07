@@ -4,30 +4,27 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorSecondary"
     tools:context=".SplashActivity">
 
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:layout_centerInParent="true"
-        android:textSize="40sp"
-        android:fontFamily="monospace"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <ImageView
+        android:id="@+id/img_app"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logo_trans"
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/app_tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/app_name"
+        android:layout_below="@id/img_app"
         android:text="@string/app_tagline"
         android:textSize="20sp"
+        android:layout_marginTop="-60dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="monospace"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:textColor="@color/colorDark"/>
 
 </RelativeLayout>

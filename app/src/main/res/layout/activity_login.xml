@@ -30,28 +30,28 @@
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textEmailAddress"
             android:hint="Email Address"
             android:paddingStart="8dp"
             android:layout_marginVertical="16dp"
             android:drawableStart="@drawable/outline_email_24"
             android:drawablePadding="8dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:background="@drawable/border"/>
 
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textPassword"
             android:hint="Password"
             android:paddingStart="8dp"
             android:drawablePadding="8dp"
             android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/outline_admin_panel_settings_24"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:background="@drawable/border"/>
 
@@ -62,6 +62,22 @@
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
             android:text="LOGIN"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account yet?"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/move_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register here"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp"/>
 
     </LinearLayout>
 

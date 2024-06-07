@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         val progressKarbo = findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
         val progressProtein = findViewById<CircularProgressBar>(R.id.progress_protein)
         val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
-        val progressVitamin = findViewById<CircularProgressBar>(R.id.progress_vitamin)
-        val progressMineral = findViewById<CircularProgressBar>(R.id.progress_mineral)
+        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
+        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
         val btnUploadImage = findViewById<Button>(R.id.btn_upload_image)
         val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
         val txtResponse = findViewById<TextView>(R.id.txt_response)
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
         }
 
-        progressVitamin.apply {
+        progressKalori.apply {
             setProgressWithAnimation(50f, 3000) // =1s
 
             progressMax = 100f
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
         }
 
-        progressMineral.apply {
+        progressGula.apply {
             setProgressWithAnimation(80f, 3000) // =1s
 
             progressMax = 100f

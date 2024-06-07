@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="6dp"
             android:background="@drawable/card_shape"
             android:orientation="vertical"
             android:padding="6dp">
@@ -98,8 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_nutrition_track"
-            android:scrollbars="none"
-            android:layout_marginTop="16dp">
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -196,15 +196,15 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txt_vitamin"
+                        android:id="@+id/txt_kalori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Vitamin"
+                        android:text="Kalori"
                         android:textSize="16sp" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_vitamin"
+                        android:id="@+id/progress_kalori"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="8dp"
@@ -222,15 +222,15 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txt_mineral"
+                        android:id="@+id/txt_gula"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Mineral"
+                        android:text="Gula"
                         android:textSize="16sp" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/progress_mineral"
+                        android:id="@+id/progress_gula"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="8dp"
@@ -261,6 +261,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_reco_food"
             android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="6dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/card_shape"
             android:gravity="center_horizontal"

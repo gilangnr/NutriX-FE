@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btn_analyze"
                 android:layout_margin="16dp"
-                android:visibility="gone" />
+               />
         </RelativeLayout>
 
 

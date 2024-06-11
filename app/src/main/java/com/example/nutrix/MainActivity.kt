@@ -22,12 +22,19 @@ import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import android.util.Base64
+import android.util.Log
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_IMAGE_SELECT = 2
     private val REQUEST_CAMERA_PERMISSION = 100
+    private var capturedImageBitmap: Bitmap? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -160,15 +167,29 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val bitmap = data?.extras?.get("data") as Bitmap
+            capturedImageBitmap = bitmap
+
             val imgView = findViewById<ImageView>(R.id.img_view)
             imgView.setImageBitmap(bitmap)
             imgView.visibility = View.VISIBLE
 
+
+            val imgString = fileToBase64(capturedImageBitmap!!)
+            val dataImage = mapOf(
+                "data" to imgString,
+                "mimeType" to capturedImageBitmap!!.fileType()
+            )
+            val dataImageString = "data: ${dataImage["data"]}, mimeType: ${dataImage["mimeType"]}"
+
+            val txtResponsee = findViewById<TextView>(R.id.txt_response)
+            txtResponsee.text = dataImageString
+
+
             val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
             btnAnalyze.visibility = View.VISIBLE
-        } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK) {
             val uri = data?.data
             val imgView = findViewById<ImageView>(R.id.img_view)
             imgView.setImageURI(uri)
@@ -205,5 +226,15 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    fun fileToBase64(bitmap: Bitmap): String? {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
+
+    fun Bitmap.fileType(): String {
+        return "image/jpg" // Asumsi tipe file PNG
     }
 }

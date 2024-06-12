@@ -170,5 +170,21 @@
             android:textColor="@color/black"
             android:text="REGISTER"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have Account?"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/move_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login here"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp"/>
+
     </LinearLayout>
 </RelativeLayout>

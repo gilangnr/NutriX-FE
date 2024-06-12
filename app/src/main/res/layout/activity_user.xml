@@ -53,6 +53,7 @@
             android:layout_marginTop="14dp"
             android:src="@drawable/outline_account_circle_24"/>
         <TextView
+            android:id="@+id/txt_fullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Full Name"
@@ -62,6 +63,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Email"
@@ -92,6 +94,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Gender"
@@ -104,6 +107,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Date of Birth"
@@ -116,6 +120,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_allergies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Allergies"
@@ -128,6 +133,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Weight"
@@ -140,6 +146,7 @@
             android:textColor="@color/white"/>
 
         <TextView
+            android:id="@+id/txt_height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User Height"

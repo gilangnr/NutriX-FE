@@ -4,6 +4,13 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+
 
 class UserActivity : AppCompatActivity() {
 
@@ -30,5 +37,36 @@ class UserActivity : AppCompatActivity() {
         txtHeight = findViewById(R.id.txt_height)
 
         back.setOnClickListener { finish() }
+
+        fecthUserData()
     }
+
+    private fun fecthUserData() {
+        val api = RetrofitClient.instance
+        api.getUsers().enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                if (response.isSuccessful) {
+                    val users = response.body()
+                    users?.let {
+                        val firstUser = it.firstOrNull()
+                        if (firstUser != null) {
+                            txtFullname.text = firstUser.name
+                            txtEmail.text = firstUser.email
+                        }
+                    }
+                } else {
+                    txtFullname.text = "Gagal mendapatkan data"
+                    txtEmail.text = "Gagal mendapatkan data"
+                }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                txtFullname.text = "Gagal mendapatkan data"
+                txtEmail.text = "Gagal mendapatkan data"
+            }
+
+        })
+    }
+
+
 }

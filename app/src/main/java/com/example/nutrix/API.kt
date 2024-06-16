@@ -8,6 +8,7 @@ import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface API {
@@ -17,7 +18,7 @@ interface API {
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("/food/calorie")
+    @PATCH("food/calorie")
     fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
 
 

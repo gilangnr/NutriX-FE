@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_view"
                 android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/colorDark"
                 android:text="Analyze My Food"
                 android:visibility="gone" />
 

@@ -1,5 +1,7 @@
 package com.example.nutrix
 
+import com.example.nutrix.models.CalorieRequest
+import com.example.nutrix.models.CalorieResponse
 import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
 import com.example.nutrix.models.User
@@ -14,6 +16,9 @@ interface API {
 
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
+
+    @POST("/food/calorie")
+    fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
 
 
 }

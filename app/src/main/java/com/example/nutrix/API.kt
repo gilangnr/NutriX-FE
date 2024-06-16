@@ -16,7 +16,6 @@ interface API {
 
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
-
     @POST("/food/calorie")
     fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
 

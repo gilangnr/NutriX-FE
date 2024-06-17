@@ -15,151 +15,69 @@
         android:layout_centerInParent="true"
         android:background="@drawable/log_shape"
         android:elevation="20dp"
-        android:padding="16dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:text="REGISTER"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="Account"
             android:layout_marginStart="-135dp"
             android:layout_marginBottom="-4dp"
-            android:textColor="@color/white"/>
+            android:text="Account"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Full Name"
-            android:paddingStart="8dp"
             android:layout_marginVertical="8dp"
+            android:background="@drawable/border"
             android:drawableStart="@drawable/outline_account_circle_24"
             android:drawablePadding="8dp"
+            android:hint="Full Name"
+            android:inputType="text"
+            android:paddingStart="8dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="textEmailAddress"
-            android:hint="Email Address"
-            android:paddingStart="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
             android:drawableStart="@drawable/outline_email_24"
             android:drawablePadding="8dp"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:paddingStart="8dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/border"
             android:drawableStart="@drawable/outline_admin_panel_settings_24"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="Personal Data"
-            android:layout_marginStart="-120dp"
-            android:layout_marginBottom="4dp"
-            android:textColor="@color/white"/>
-
-        <EditText
-            android:id="@+id/edit_gender"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Gender"
-            android:paddingStart="8dp"
             android:drawablePadding="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/baseline_male_24"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
-        <EditText
-            android:id="@+id/edit_dob"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:clickable="false"
-            android:onClick="showDatePickerDialog"
-            android:hint="Date of Birth"
+            android:hint="Password"
+            android:inputType="textPassword"
             android:paddingStart="8dp"
-            android:drawablePadding="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/outline_date_range_24"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
-        <EditText
-            android:id="@+id/edit_allergies"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Allergies"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/outline_coronavirus_24"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
-        <EditText
-            android:id="@+id/edit_weight"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Weight"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/outline_bento_24"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
-        <EditText
-            android:id="@+id/edit_height"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Height"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/outline_align_horizontal_center_24"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/border"/>
-
+            android:textSize="20sp" />
 
 
         <Button
@@ -167,24 +85,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            android:text="REGISTER"/>
+            android:text="REGISTER"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Already have Account?"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:layout_marginTop="4dp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/move_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text="Login here"
-            android:textColor="@color/white"
-            android:layout_marginTop="2dp"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </RelativeLayout>

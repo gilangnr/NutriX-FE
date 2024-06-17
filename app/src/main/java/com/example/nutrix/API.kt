@@ -4,6 +4,8 @@ import com.example.nutrix.models.CalorieRequest
 import com.example.nutrix.models.CalorieResponse
 import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
+import com.example.nutrix.models.RegisterRequest
+import com.example.nutrix.models.RegisterResponse
 import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -21,5 +23,7 @@ interface API {
     @PATCH("food/calorie")
     fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
 
+    @POST("auth/register")
+    fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
 }

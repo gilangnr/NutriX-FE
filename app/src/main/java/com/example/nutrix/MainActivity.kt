@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
@@ -27,7 +28,9 @@ import java.io.ByteArrayOutputStream
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
+import android.os.Build
 import android.util.Base64
+import androidx.annotation.RequiresApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_CAMERA_PERMISSION = 100
     private var capturedImageBitmap: Bitmap? = null
     private var progressDialog: ProgressDialog? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,7 +137,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         showProgressDialog("Analyzing food...")
-
         val calorieRequest = CalorieRequest(userId, base64Image)
 
         val api = RetrofitClient.instance
@@ -179,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 
     private fun showProgressDialog(message: String) {
         progressDialog = ProgressDialog(this)
@@ -232,6 +232,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Deprecated in Java, but necessary for onActivityResult in Kotlin
+    @RequiresApi(Build.VERSION_CODES.P)
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -256,6 +257,11 @@ class MainActivity : AppCompatActivity() {
             val imgView = findViewById<ImageView>(R.id.img_view)
             imgView.setImageURI(uri)
             imgView.visibility = View.VISIBLE
+
+            // Convert selected image to Bitmap
+            val source = ImageDecoder.createSource(this.contentResolver, uri!!)
+            val bitmap = ImageDecoder.decodeBitmap(source)
+            capturedImageBitmap = bitmap
 
             val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
             btnAnalyze.visibility = View.VISIBLE
@@ -299,9 +305,9 @@ class MainActivity : AppCompatActivity() {
     // Method to convert Bitmap to Base64 string
     private fun fileToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }
 
     //    MENU PROFILE

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bacground1"
+    tools:context=".RegisProfileActivity">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/log_shape"
+        android:elevation="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Profile"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-120dp"
+            android:layout_marginBottom="4dp"
+            android:text="Personal Data"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_gender"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:drawableStart="@drawable/baseline_male_24"
+            android:drawablePadding="8dp"
+            android:hint="Gender"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edit_dob"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:clickable="false"
+            android:drawableStart="@drawable/outline_date_range_24"
+            android:drawablePadding="8dp"
+            android:hint="Date of Birth"
+            android:onClick="showDatePickerDialog"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edit_allergies"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:drawableStart="@drawable/outline_coronavirus_24"
+            android:drawablePadding="8dp"
+            android:hint="Allergies"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edit_weight"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:drawableStart="@drawable/outline_bento_24"
+            android:drawablePadding="8dp"
+            android:hint="Weight"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edit_height"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:drawableStart="@drawable/outline_align_horizontal_center_24"
+            android:drawablePadding="8dp"
+            android:hint="Height"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_send_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="SEND DATA"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</RelativeLayout>

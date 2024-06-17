@@ -35,8 +35,6 @@ class RegisterActivity : AppCompatActivity() {
 
 
         btnRegister.setOnClickListener {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
             registerUser()
         }
 
@@ -63,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
                     val registerResponse = response.body()!!
                     if (registerResponse.status == 200) {
                         Toast.makeText(this@RegisterActivity, "Registration Successful", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                        val intent = Intent(this@RegisterActivity, RegisProfileActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

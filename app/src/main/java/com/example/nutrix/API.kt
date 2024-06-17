@@ -22,7 +22,7 @@ interface API {
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @PATCH("food/calorie")
+    @PATCH("food/nutrition")
     fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
 
     @POST("auth/register")

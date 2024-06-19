@@ -31,6 +31,8 @@ import android.app.ProgressDialog
 import android.os.Build
 import android.util.Base64
 import androidx.annotation.RequiresApi
+import com.example.nutrix.models.Nutrition
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,56 +47,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize UI elements
-        val progressKarbo = findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
-        val progressProtein = findViewById<CircularProgressBar>(R.id.progress_protein)
-        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
-        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
-        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
         val btnUploadImage = findViewById<Button>(R.id.btn_upload_image)
         val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
         val btnRecomendation = findViewById<Button>(R.id.btn_recomendation)
-        val txtResponse = findViewById<TextView>(R.id.txt_response)
 
         // Set progress for CircularProgressBar
-        progressKarbo.apply {
-            setProgressWithAnimation(65f, 3000) // =1s
-            progressMax = 100f
-            roundBorder = true
-            startAngle = 180f
-            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-        }
-
-        progressProtein.apply {
-            setProgressWithAnimation(90f, 3000) // =1s
-            progressMax = 100f
-            roundBorder = true
-            startAngle = 180f
-            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-        }
-
-        progressLemak.apply {
-            setProgressWithAnimation(30f, 3000) // =1s
-            progressMax = 100f
-            roundBorder = true
-            startAngle = 180f
-            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-        }
-
-        progressKalori.apply {
-            setProgressWithAnimation(50f, 3000) // =1s
-            progressMax = 100f
-            roundBorder = true
-            startAngle = 180f
-            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-        }
-
-        progressGula.apply {
-            setProgressWithAnimation(80f, 3000) // =1s
-            progressMax = 100f
-            roundBorder = true
-            startAngle = 180f
-            progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
-        }
+        setNutritionProgressBarMax()
 
         // Set onClickListener for btnUploadImage
         btnUploadImage.setOnClickListener {
@@ -126,6 +84,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setNutritionProgressBarMax() {
+        val userId = "user123"//ganti ger
+        val api = RetrofitClient.instance
+        api.getTotalNutrition(userId).enqueue(object : Callback<Nutrition> {
+            override fun onResponse(call: Call<Nutrition>, response: Response<Nutrition>) {
+                if (response.isSuccessful) {
+                    val nutrition = response.body()
+                    if (nutrition != null) {
+                        val progressKarbo = findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+                        val progressProtein = findViewById<CircularProgressBar>(R.id.progress_protein)
+                        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
+                        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
+                        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
+
+                        progressKarbo.progressMax = nutrition.dailyCarbohydrate
+                        progressProtein.progressMax = nutrition.dailyProtein
+                        progressLemak.progressMax = nutrition.dailyFat
+                        progressKalori.progressMax = nutrition.dailyCalorie
+                        progressGula.progressMax = nutrition.dailySugar
+                    }
+                } else {
+                    showToast("Gagal mendapatkan data nutrisi")
+                }
+            }
+
+            override fun onFailure(call: Call<Nutrition>, t: Throwable) {
+                showToast("Error: ${t.message}")
+            }
+
+        })
+    }
+
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
         val userId = "user123"  // Sesuaikan dengan userId yang sebenarnya
@@ -149,15 +139,11 @@ class MainActivity : AppCompatActivity() {
                 dismissProgressDialog()
                 if (response.isSuccessful) {
                     val calorieResponse = response.body()
-                    if (calorieResponse != null && calorieResponse.foodInfo != null) {
+                    if (calorieResponse != null) {
+                        // Menampilkan respon JSON secara langsung
+                        val jsonResponse = Gson().toJson(calorieResponse)
                         val txtResponse = findViewById<TextView>(R.id.txt_response)
-                        txtResponse.text = "Food: ${calorieResponse.foodInfo.foodName}\n" +
-                                "Calories: ${calorieResponse.foodInfo.calorie}\n" +
-                                "Carbs: ${calorieResponse.foodInfo.carbohydrate}\n" +
-                                "Fat: ${calorieResponse.foodInfo.fat}\n" +
-                                "Protein: ${calorieResponse.foodInfo.protein}\n" +
-                                "Sugar: ${calorieResponse.foodInfo.sugar}"
-                        txtResponse.visibility = View.VISIBLE
+                        txtResponse.text = jsonResponse
                     } else {
                         showToast("Failed to get valid response data")
                     }
@@ -247,8 +233,8 @@ class MainActivity : AppCompatActivity() {
             val imgString = fileToBase64(capturedImageBitmap!!)
             val dataImageString = "data: ${imgString}, mimeType: image/jpg"
 
-            val txtResponse = findViewById<TextView>(R.id.txt_response)
-            txtResponse.text = dataImageString
+//            val txtResponse = findViewById<TextView>(R.id.txt_response)
+//            txtResponse.text = dataImageString
 
             val btnAnalyze = findViewById<Button>(R.id.btn_analyze)
             btnAnalyze.visibility = View.VISIBLE

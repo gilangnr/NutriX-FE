@@ -6,6 +6,7 @@ import com.example.nutrix.models.CreateProfileRequest
 import com.example.nutrix.models.CreateProfileResponse
 import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
+import com.example.nutrix.models.Profile
 import com.example.nutrix.models.RegisterRequest
 import com.example.nutrix.models.RegisterResponse
 import com.example.nutrix.models.User
@@ -18,6 +19,9 @@ import retrofit2.http.POST
 interface API {
     @GET("users")
     fun getUsers(): Call<List<User>>
+
+    @GET("profile")
+    fun getProfiles(): Call<List<Profile>>
 
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.nutrix.models.Profile
 import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +38,7 @@ class UserActivity : AppCompatActivity() {
         back.setOnClickListener { finish() }
 
         fecthUserData()
+        fecthUserProfile()
     }
 
     private fun fecthUserData() {
@@ -61,6 +63,42 @@ class UserActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 txtFullname.text = "Gagal mendapatkan data"
                 txtEmail.text = "Gagal mendapatkan data"
+            }
+
+        })
+    }
+
+    private fun fecthUserProfile() {
+        val api = RetrofitClient.instance
+        api.getProfiles().enqueue(object : Callback<List<Profile>> {
+            override fun onResponse(call: Call<List<Profile>>, response: Response<List<Profile>>) {
+                if (response.isSuccessful) {
+                    val profiles = response.body()
+                    profiles?.let {
+                        val firstProfile = it.firstOrNull()
+                        if (firstProfile != null) {
+                            txtGender.text = firstProfile.gender
+                            txtDob.text = firstProfile.dateOfBirth
+                            txtAllergies.text = firstProfile.allergies ?: "Tidak ada"
+                            txtWeight.text = firstProfile.weight.toString()
+                            txtHeight.text = firstProfile.height.toString()
+                        }
+                    }
+                } else {
+                    txtGender.text = "Gagal mendapatkan data"
+                    txtDob.text = "Gagal mendapatkan data"
+                    txtAllergies.text = "Gagal mendapatkan data"
+                    txtWeight.text = "Gagal mendapatkan data"
+                    txtHeight.text = "Gagal mendapatkan data"
+                }
+            }
+
+            override fun onFailure(call: Call<List<Profile>>, t: Throwable) {
+                txtGender.text = "Gagal mendapatkan data"
+                txtDob.text = "Gagal mendapatkan data"
+                txtAllergies.text = "Gagal mendapatkan data"
+                txtWeight.text = "Gagal mendapatkan data"
+                txtHeight.text = "Gagal mendapatkan data"
             }
 
         })

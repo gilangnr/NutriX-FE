@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setNutritionProgressBarMax() {
-        val userId = "user123"//ganti ger
+        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
         val api = RetrofitClient.instance
         api.getTotalNutrition(userId).enqueue(object : Callback<Nutrition> {
             override fun onResponse(call: Call<Nutrition>, response: Response<Nutrition>) {
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
-        val userId = "user123"  // Sesuaikan dengan userId yang sebenarnya
+        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"  // Sesuaikan dengan userId yang sebenarnya
 
         // Validasi base64Image, jika null atau kosong, tidak perlu melakukan request
         if (base64Image.isNullOrEmpty()) {

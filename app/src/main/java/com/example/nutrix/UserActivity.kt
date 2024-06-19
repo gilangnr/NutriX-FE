@@ -69,20 +69,14 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun fecthUserProfile() {
+        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"
         val api = RetrofitClient.instance
-        api.getProfiles().enqueue(object : Callback<List<Profile>> {
-            override fun onResponse(call: Call<List<Profile>>, response: Response<List<Profile>>) {
+        api.getProfiles(userId).enqueue(object : Callback<Profile> {
+            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 if (response.isSuccessful) {
-                    val profiles = response.body()
-                    profiles?.let {
-                        val firstProfile = it.firstOrNull()
-                        if (firstProfile != null) {
-                            txtGender.text = firstProfile.gender
-                            txtDob.text = firstProfile.dateOfBirth
-                            txtAllergies.text = firstProfile.allergies ?: "Tidak ada"
-                            txtWeight.text = firstProfile.weight.toString()
-                            txtHeight.text = firstProfile.height.toString()
-                        }
+                    val profile = response.body()
+                    profile?.let {
+                        txtGender.text = profile.toString()
                     }
                 } else {
                     txtGender.text = "Gagal mendapatkan data"
@@ -93,7 +87,7 @@ class UserActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Profile>>, t: Throwable) {
+            override fun onFailure(call: Call<Profile>, t: Throwable) {
                 txtGender.text = "Gagal mendapatkan data"
                 txtDob.text = "Gagal mendapatkan data"
                 txtAllergies.text = "Gagal mendapatkan data"

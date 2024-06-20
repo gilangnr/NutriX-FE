@@ -6,6 +6,7 @@ import com.example.nutrix.models.CreateProfileRequest
 import com.example.nutrix.models.CreateProfileResponse
 import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
+import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.Nutrition
 import com.example.nutrix.models.Profile
 import com.example.nutrix.models.ProfileResponse
@@ -37,6 +38,6 @@ interface API {
     fun createProfile(@Body request: CreateProfileRequest): Call<CreateProfileResponse>
 
     @GET("profile/nutrition/{userId}")
-    fun getTotalNutrition(@Path("userId") userId: String): Call<Nutrition>
+    fun getTotalNutrition(@Path("userId") userId: String): Call<NutririonMax>
 
 }

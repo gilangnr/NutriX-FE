@@ -31,6 +31,7 @@ import android.app.ProgressDialog
 import android.os.Build
 import android.util.Base64
 import androidx.annotation.RequiresApi
+import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.Nutrition
 import com.google.gson.Gson
 
@@ -87,8 +88,8 @@ class MainActivity : AppCompatActivity() {
     private fun setNutritionProgressBarMax() {
         val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
         val api = RetrofitClient.instance
-        api.getTotalNutrition(userId).enqueue(object : Callback<Nutrition> {
-            override fun onResponse(call: Call<Nutrition>, response: Response<Nutrition>) {
+        api.getTotalNutrition(userId).enqueue(object : Callback<NutririonMax> {
+            override fun onResponse(call: Call<NutririonMax>, response: Response<NutririonMax>) {
                 if (response.isSuccessful) {
                     val nutrition = response.body()
                     if (nutrition != null) {
@@ -100,21 +101,21 @@ class MainActivity : AppCompatActivity() {
                         val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
                         val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
 
-                        progressKarbo.progressMax = nutrition.dailyCarbohydrate
-                        progressProtein.progressMax = nutrition.dailyProtein
-                        progressLemak.progressMax = nutrition.dailyFat
-                        progressKalori.progressMax = nutrition.dailyCalorie
-                        progressGula.progressMax = nutrition.dailySugar
+                        progressKarbo.progressMax = nutrition.data.carbohydrate
+                        progressProtein.progressMax = nutrition.data.proteins
+                        progressLemak.progressMax = nutrition.data.fat
+                        progressKalori.progressMax = nutrition.data.calories
+                        progressGula.progressMax = nutrition.data.sugar
 
 //                        debug
-                        showToast("Progress Max Karbohidrat: ${nutrition.dailyCarbohydrate}")
+                        showToast("Progress Max Karbohidrat: ${nutrition.data.carbohydrate}")
                     }
                 } else {
                     showToast("Gagal mendapatkan data nutrisi")
                 }
             }
 
-            override fun onFailure(call: Call<Nutrition>, t: Throwable) {
+            override fun onFailure(call: Call<NutririonMax>, t: Throwable) {
                 showToast("Error: ${t.message}")
             }
 

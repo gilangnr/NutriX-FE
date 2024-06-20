@@ -33,6 +33,7 @@ import android.util.Base64
 import androidx.annotation.RequiresApi
 import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.Nutrition
+import com.example.nutrix.models.ProgressNutrition
 import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         // Set progress for CircularProgressBar
         setNutritionProgressBarMax()
+
+        setProgressNutrition()
 
         // Set onClickListener for btnUploadImage
         btnUploadImage.setOnClickListener {
@@ -85,6 +88,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setProgressNutrition() {
+        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
+        val api = RetrofitClient.instance
+
+        api.getProgressNutrition(userId).enqueue(object : Callback<ProgressNutrition> {
+            override fun onResponse(
+                call: Call<ProgressNutrition>,
+                response: Response<ProgressNutrition>
+            ) {
+                if (response.isSuccessful) {
+                    val nutrition = response.body()
+                    if (nutrition != null) {
+                        val progressKarbo =
+                            findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+                        val progressProtein =
+                            findViewById<CircularProgressBar>(R.id.progress_protein)
+                        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
+                        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
+                        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
+
+                        progressKarbo.progress = nutrition.data.totalCarbohydrate
+                        progressProtein.progress = nutrition.data.totalProtein
+                        progressLemak.progress = nutrition.data.totalFat
+                        progressKalori.progress = nutrition.data.totalCalories
+                        progressGula.progress = nutrition.data.totalSugar
+                    }
+                } else {
+                    showToast("Gagal mendapatkan data progress nutrisi")
+                }
+            }
+
+            override fun onFailure(call: Call<ProgressNutrition>, t: Throwable) {
+                showToast("Error: ${t.message}")
+            }
+
+        })
+    }
+
     private fun setNutritionProgressBarMax() {
         val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
         val api = RetrofitClient.instance
@@ -111,7 +152,7 @@ class MainActivity : AppCompatActivity() {
                         showToast("Progress Max Karbohidrat: ${nutrition.data.carbohydrate}")
                     }
                 } else {
-                    showToast("Gagal mendapatkan data nutrisi")
+                    showToast("Gagal mendapatkan data max nutrisi")
                 }
             }
 
@@ -147,10 +188,8 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val calorieResponse = response.body()
                     if (calorieResponse != null) {
-                        // Menampilkan respon JSON secara langsung
-                        val jsonResponse = Gson().toJson(calorieResponse)
                         val txtResponse = findViewById<TextView>(R.id.txt_response)
-                        txtResponse.text = jsonResponse
+                        txtResponse.text = calorieResponse.foodInfo.foodName
                     } else {
                         showToast("Failed to get valid response data")
                     }

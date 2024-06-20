@@ -10,6 +10,7 @@ import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.Nutrition
 import com.example.nutrix.models.Profile
 import com.example.nutrix.models.ProfileResponse
+import com.example.nutrix.models.ProgressNutrition
 import com.example.nutrix.models.RegisterRequest
 import com.example.nutrix.models.RegisterResponse
 import com.example.nutrix.models.User
@@ -40,4 +41,6 @@ interface API {
     @GET("profile/nutrition/{userId}")
     fun getTotalNutrition(@Path("userId") userId: String): Call<NutririonMax>
 
+    @GET("food/nutrition/progress/{userId}")
+    fun getProgressNutrition(@Path("userId") userId: String): Call<ProgressNutrition>
 }

@@ -92,8 +92,10 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val nutrition = response.body()
                     if (nutrition != null) {
-                        val progressKarbo = findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
-                        val progressProtein = findViewById<CircularProgressBar>(R.id.progress_protein)
+                        val progressKarbo =
+                            findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+                        val progressProtein =
+                            findViewById<CircularProgressBar>(R.id.progress_protein)
                         val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
                         val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
                         val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
@@ -103,6 +105,9 @@ class MainActivity : AppCompatActivity() {
                         progressLemak.progressMax = nutrition.dailyFat
                         progressKalori.progressMax = nutrition.dailyCalorie
                         progressGula.progressMax = nutrition.dailySugar
+
+//                        debug
+                        showToast("Progress Max Karbohidrat: ${nutrition.dailyCarbohydrate}")
                     }
                 } else {
                     showToast("Gagal mendapatkan data nutrisi")
@@ -118,7 +123,8 @@ class MainActivity : AppCompatActivity() {
 
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
-        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"  // Sesuaikan dengan userId yang sebenarnya
+        val userId =
+            "d5790195-555d-42f1-807d-9752667e7fc2"  // Sesuaikan dengan userId yang sebenarnya
 
         // Validasi base64Image, jika null atau kosong, tidak perlu melakukan request
         if (base64Image.isNullOrEmpty()) {

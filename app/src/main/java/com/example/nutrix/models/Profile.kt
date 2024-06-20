@@ -11,7 +11,9 @@ data class Profile(
     val createdAt: String,
     val updatedAt: String,
     val user: user
-) data class user(
+)
+
+data class user(
     val name: String,
     val email: String
 )

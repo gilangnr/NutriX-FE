@@ -8,6 +8,7 @@ import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
 import com.example.nutrix.models.Nutrition
 import com.example.nutrix.models.Profile
+import com.example.nutrix.models.ProfileResponse
 import com.example.nutrix.models.RegisterRequest
 import com.example.nutrix.models.RegisterResponse
 import com.example.nutrix.models.User
@@ -23,7 +24,7 @@ interface API {
     fun getUsers(): Call<List<User>>
 
     @GET("profile/{userId}")
-    fun getProfiles(@Path("userId") userId: String): Call<Profile>
+    fun getProfiles(@Path("userId") userId: String): Call<ProfileResponse>
 
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>

@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nutrix.models.Profile
+import com.example.nutrix.models.ProfileResponse
 import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,7 +39,7 @@ class UserActivity : AppCompatActivity() {
         back.setOnClickListener { finish() }
 
         fecthUserData()
-        fecthUserProfile()
+        fetchUserProfile()
     }
 
     private fun fecthUserData() {
@@ -68,33 +69,39 @@ class UserActivity : AppCompatActivity() {
         })
     }
 
-    private fun fecthUserProfile() {
+    private fun fetchUserProfile() {
         val userId = "d5790195-555d-42f1-807d-9752667e7fc2"
         val api = RetrofitClient.instance
-        api.getProfiles(userId).enqueue(object : Callback<Profile> {
-            override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
+
+        api.getProfiles(userId).enqueue(object : Callback<ProfileResponse> {
+            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
                 if (response.isSuccessful) {
-                    val profile = response.body()
-                    profile?.let {
-                        txtGender.text = profile.toString()
+                    val profileResponse = response.body()
+                    val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
+
+                    profile?.let { actualProfile ->
+                        txtGender.text = actualProfile.gender ?: "Data not available"
+                        txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
+                        txtAllergies.text = actualProfile.allergies ?: "Data not available"
+                        txtWeight.text = actualProfile.weight.toString() ?: "Data not available"
+                        txtHeight.text = actualProfile.height.toString() ?: "Data not available"
                     }
                 } else {
-                    txtGender.text = "Gagal mendapatkan data"
-                    txtDob.text = "Gagal mendapatkan data"
-                    txtAllergies.text = "Gagal mendapatkan data"
-                    txtWeight.text = "Gagal mendapatkan data"
-                    txtHeight.text = "Gagal mendapatkan data"
+                    handleErrorResponse()
                 }
             }
 
-            override fun onFailure(call: Call<Profile>, t: Throwable) {
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                handleErrorResponse()
+            }
+
+            private fun handleErrorResponse() {
                 txtGender.text = "Gagal mendapatkan data"
                 txtDob.text = "Gagal mendapatkan data"
                 txtAllergies.text = "Gagal mendapatkan data"
                 txtWeight.text = "Gagal mendapatkan data"
                 txtHeight.text = "Gagal mendapatkan data"
             }
-
         })
     }
 

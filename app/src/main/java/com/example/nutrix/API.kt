@@ -20,8 +20,6 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface API {
-    @GET("users")
-    fun getUsers(): Call<List<User>>
 
     @GET("profile/{userId}")
     fun getProfiles(@Path("userId") userId: String): Call<ProfileResponse>

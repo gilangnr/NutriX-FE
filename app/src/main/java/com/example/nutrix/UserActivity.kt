@@ -38,36 +38,9 @@ class UserActivity : AppCompatActivity() {
 
         back.setOnClickListener { finish() }
 
-        fecthUserData()
         fetchUserProfile()
     }
 
-    private fun fecthUserData() {
-        val api = RetrofitClient.instance
-        api.getUsers().enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                if (response.isSuccessful) {
-                    val users = response.body()
-                    users?.let {
-                        val firstUser = it.firstOrNull()
-                        if (firstUser != null) {
-                            txtFullname.text = firstUser.name
-                            txtEmail.text = firstUser.email
-                        }
-                    }
-                } else {
-                    txtFullname.text = "Gagal mendapatkan data"
-                    txtEmail.text = "Gagal mendapatkan data"
-                }
-            }
-
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                txtFullname.text = "Gagal mendapatkan data"
-                txtEmail.text = "Gagal mendapatkan data"
-            }
-
-        })
-    }
 
     private fun fetchUserProfile() {
         val userId = "d5790195-555d-42f1-807d-9752667e7fc2"
@@ -80,6 +53,8 @@ class UserActivity : AppCompatActivity() {
                     val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
 
                     profile?.let { actualProfile ->
+                        txtFullname.text = actualProfile.user?.name ?: "Data not available"
+                        txtEmail.text = actualProfile.user?.email ?: "Data not available"
                         txtGender.text = actualProfile.gender ?: "Data not available"
                         txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
                         txtAllergies.text = actualProfile.allergies ?: "Data not available"
@@ -96,6 +71,8 @@ class UserActivity : AppCompatActivity() {
             }
 
             private fun handleErrorResponse() {
+                txtFullname.text = "Gagal mendapatkan data"
+                txtEmail.text = "Gagal mendapatkan data"
                 txtGender.text = "Gagal mendapatkan data"
                 txtDob.text = "Gagal mendapatkan data"
                 txtAllergies.text = "Gagal mendapatkan data"

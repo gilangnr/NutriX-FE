@@ -189,7 +189,13 @@ class MainActivity : AppCompatActivity() {
                     val calorieResponse = response.body()
                     if (calorieResponse != null) {
                         val txtResponse = findViewById<TextView>(R.id.txt_response)
-                        txtResponse.text = calorieResponse.foodInfo.foodName
+                        val foodInfo = calorieResponse.foodInfo
+                        txtResponse.text = "Food Name: ${foodInfo.foodName}\n" +
+                                "Calories: ${foodInfo.calorie} kcal\n" +
+                                "Protein: ${foodInfo.protein} g\n" +
+                                "Carbohydrates: ${foodInfo.carbohydrate} g\n" +
+                                "Fats: ${foodInfo.fat} g\n" +
+                                "Sugar: ${foodInfo.sugar} g"
                     } else {
                         showToast("Failed to get valid response data")
                     }

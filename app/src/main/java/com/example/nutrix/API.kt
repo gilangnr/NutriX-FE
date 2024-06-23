@@ -7,13 +7,10 @@ import com.example.nutrix.models.CreateProfileResponse
 import com.example.nutrix.models.LoginRequest
 import com.example.nutrix.models.LoginResponse
 import com.example.nutrix.models.NutririonMax
-import com.example.nutrix.models.Nutrition
-import com.example.nutrix.models.Profile
 import com.example.nutrix.models.ProfileResponse
 import com.example.nutrix.models.ProgressNutrition
 import com.example.nutrix.models.RegisterRequest
 import com.example.nutrix.models.RegisterResponse
-import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

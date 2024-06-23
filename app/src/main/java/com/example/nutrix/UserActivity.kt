@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.nutrix.models.Profile
 import com.example.nutrix.models.ProfileResponse
-import com.example.nutrix.models.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,8 +51,8 @@ class UserActivity : AppCompatActivity() {
                     val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
 
                     profile?.let { actualProfile ->
-                        txtFullname.text = actualProfile.user?.name ?: "Data not available"
-                        txtEmail.text = actualProfile.user?.email ?: "Data not available"
+                        txtFullname.text = actualProfile.pengguna?.name ?: "Data not available"
+                        txtEmail.text = actualProfile.pengguna?.email ?: "Data not available"
                         txtGender.text = actualProfile.gender ?: "Data not available"
                         txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
                         txtAllergies.text = actualProfile.allergies ?: "Data not available"

@@ -30,11 +30,10 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.os.Build
 import android.util.Base64
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.nutrix.models.NutririonMax
-import com.example.nutrix.models.Nutrition
 import com.example.nutrix.models.ProgressNutrition
-import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
@@ -186,6 +185,7 @@ class MainActivity : AppCompatActivity() {
                 dismissProgressDialog()
                 if (response.isSuccessful) {
                     val calorieResponse = response.body()
+                    Log.d("response body", response.body().toString())
                     if (calorieResponse != null) {
                         val txtResponse = findViewById<TextView>(R.id.txt_response)
                         val foodInfo = calorieResponse.foodInfo

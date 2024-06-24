@@ -188,8 +188,8 @@ class MainActivity : AppCompatActivity() {
                     Log.d("response body", response.body().toString())
                     if (calorieResponse != null) {
                         val txtResponse = findViewById<TextView>(R.id.txt_response)
-                        val foodInfo = calorieResponse.foodInfo
-                        val totalNutrition = calorieResponse.totalNutrition
+                        val foodInfo = calorieResponse.data.foodInfo
+                        val totalNutrition = calorieResponse.data.totalNutrition
 
                         txtResponse.text = "Food Name: ${foodInfo.foodName}\n" +
                                 "Calories: ${foodInfo.calorie} kcal\n" +

@@ -3,6 +3,10 @@ package com.example.nutrix.models
 data class CalorieResponse(
     val status: Int,
     val message: String,
+    val data: dataResponse,
+)
+
+data class dataResponse(
     val foodInfo: FoodInfo,
     val totalNutrition: TotalNutrition
 )

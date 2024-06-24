@@ -26,8 +26,11 @@ interface API {
     @POST("auth/login")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @PATCH("food/nutrition")
-    fun calorieTracker(@Body request: CalorieRequest): Call<CalorieResponse>
+    @PATCH("food/nutrition/{userId}")
+    fun calorieTracker(
+        @Path("userId") userId: String,
+        @Body request: CalorieRequest
+    ): Call<CalorieResponse>
 
     @POST("auth/register")
     fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>

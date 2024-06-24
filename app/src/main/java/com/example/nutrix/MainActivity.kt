@@ -165,8 +165,7 @@ class MainActivity : AppCompatActivity() {
 
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
-        val userId =
-            "d5790195-555d-42f1-807d-9752667e7fc2"  // Sesuaikan dengan userId yang sebenarnya
+        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"
 
         // Validasi base64Image, jika null atau kosong, tidak perlu melakukan request
         if (base64Image.isNullOrEmpty()) {
@@ -175,10 +174,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         showProgressDialog("Analyzing food...")
-        val calorieRequest = CalorieRequest(userId, base64Image)
+        val calorieRequest = CalorieRequest(base64Image)
 
         val api = RetrofitClient.instance
-        api.calorieTracker(calorieRequest).enqueue(object : Callback<CalorieResponse> {
+        api.calorieTracker(userId, calorieRequest).enqueue(object : Callback<CalorieResponse> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<CalorieResponse>,

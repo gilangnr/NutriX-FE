@@ -51,8 +51,8 @@ class UserActivity : AppCompatActivity() {
                     val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
 
                     profile?.let { actualProfile ->
-                        txtFullname.text = actualProfile.pengguna?.name ?: "Data not available"
-                        txtEmail.text = actualProfile.pengguna?.email ?: "Data not available"
+                        txtFullname.text = actualProfile.user?.name ?: "Data not available"
+                        txtEmail.text = actualProfile.user?.email ?: "Data not available"
                         txtGender.text = actualProfile.gender ?: "Data not available"
                         txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
                         txtAllergies.text = actualProfile.allergies ?: "Data not available"

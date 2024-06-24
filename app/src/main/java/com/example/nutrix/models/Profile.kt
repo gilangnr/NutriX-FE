@@ -10,7 +10,7 @@ data class Profile(
     val height: Float,
     val createdAt: String,
     val updatedAt: String,
-    val pengguna: Pengguna
+    val user: Pengguna
 )
 
 data class Pengguna(

@@ -147,6 +147,26 @@
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorPrimary"
                         app:cpb_progressbar_width="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txt_prog_karbohidrat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/txt_max_karbohidrat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,6 +194,24 @@
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorPrimary"
                         app:cpb_progressbar_width="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txt_prog_protein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/txt_max_protein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -201,6 +239,24 @@
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorPrimary"
                         app:cpb_progressbar_width="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txt_prog_lemak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/txt_max_lemak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -228,6 +284,24 @@
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorPrimary"
                         app:cpb_progressbar_width="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txt_prog_kalori"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/txt_max_kalori"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -254,6 +328,24 @@
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorPrimary"
                         app:cpb_progressbar_width="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txt_prog_gula"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/txt_max_gula"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

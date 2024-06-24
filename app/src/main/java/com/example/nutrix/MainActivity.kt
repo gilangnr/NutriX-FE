@@ -107,11 +107,23 @@ class MainActivity : AppCompatActivity() {
                         val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
                         val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
 
+                        val txtProgKarbo = findViewById<TextView>(R.id.txt_prog_karbohidrat)
+                        val txtProgProtein = findViewById<TextView>(R.id.txt_prog_protein)
+                        val txtProgLemak = findViewById<TextView>(R.id.txt_prog_lemak)
+                        val txtProgKalori = findViewById<TextView>(R.id.txt_prog_kalori)
+                        val txtProgGula = findViewById<TextView>(R.id.txt_prog_gula)
+
                         progressKarbo.progress = nutrition.data.totalCarbohydrate
                         progressProtein.progress = nutrition.data.totalProtein
                         progressLemak.progress = nutrition.data.totalFat
                         progressKalori.progress = nutrition.data.totalCalories
                         progressGula.progress = nutrition.data.totalSugar
+
+                        txtProgKarbo.text = nutrition.data.totalCarbohydrate.toString() + "/"
+                        txtProgProtein.text = nutrition.data.totalProtein.toString() + "/"
+                        txtProgLemak.text = nutrition.data.totalFat.toString() + "/"
+                        txtProgKalori.text = nutrition.data.totalCalories.toString() + "/"
+                        txtProgGula.text = nutrition.data.totalSugar.toString() + "/"
                     }
                 } else {
                     showToast("Gagal mendapatkan data progress nutrisi")
@@ -141,14 +153,24 @@ class MainActivity : AppCompatActivity() {
                         val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
                         val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
 
+                        val txtMaxKarbo = findViewById<TextView>(R.id.txt_max_karbohidrat)
+                        val txtMaxProtein = findViewById<TextView>(R.id.txt_max_protein)
+                        val txtMaxLemak = findViewById<TextView>(R.id.txt_max_lemak)
+                        val txtMaxKalori = findViewById<TextView>(R.id.txt_max_kalori)
+                        val txtMaxGula = findViewById<TextView>(R.id.txt_max_gula)
+
                         progressKarbo.progressMax = nutrition.data.carbohydrate
                         progressProtein.progressMax = nutrition.data.proteins
                         progressLemak.progressMax = nutrition.data.fat
                         progressKalori.progressMax = nutrition.data.calories
                         progressGula.progressMax = nutrition.data.sugar
 
-//                        debug
-                        showToast("Progress Max Karbohidrat: ${nutrition.data.carbohydrate}")
+                        txtMaxKarbo.text = nutrition.data.carbohydrate.toString()
+                        txtMaxProtein.text = nutrition.data.proteins.toString()
+                        txtMaxLemak.text = nutrition.data.fat.toString()
+                        txtMaxKalori.text = nutrition.data.calories.toString()
+                        txtMaxGula.text = nutrition.data.sugar.toString()
+
                     }
                 } else {
                     showToast("Gagal mendapatkan data max nutrisi")

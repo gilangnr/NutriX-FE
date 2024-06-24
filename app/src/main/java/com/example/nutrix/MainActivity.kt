@@ -191,29 +191,18 @@ class MainActivity : AppCompatActivity() {
                         val foodInfo = calorieResponse.foodInfo
                         val totalNutrition = calorieResponse.totalNutrition
 
-                        if (foodInfo != null && totalNutrition != null) {
-                            txtResponse.text = "Food Name: ${foodInfo.foodName}\n" +
-                                    "Calories: ${foodInfo.calorie} kcal\n" +
-                                    "Protein: ${foodInfo.protein} g\n" +
-                                    "Carbohydrates: ${foodInfo.carbohydrate} g\n" +
-                                    "Fats: ${foodInfo.fat} g\n" +
-                                    "Sugar: ${foodInfo.sugar} g\n\n" +
-                                    "Total Nutrition:\n" +
-                                    "Total Calories: ${totalNutrition.totalCalories} kcal\n" +
-                                    "Total Carbohydrates: ${totalNutrition.totalCarbohydrate} g\n" +
-                                    "Total Protein: ${totalNutrition.totalProtein} g\n" +
-                                    "Total Fats: ${totalNutrition.totalFat} g\n" +
-                                    "Total Sugar: ${totalNutrition.totalSugar} g"
-                        } else {
-                            if (foodInfo == null) {
-
-                                showToast("Food info is null")
-                            }
-                            if (totalNutrition == null) {
-
-                                showToast("Total nutrition info is null")
-                            }
-                        }
+                        txtResponse.text = "Food Name: ${foodInfo.foodName}\n" +
+                                "Calories: ${foodInfo.calorie} kcal\n" +
+                                "Protein: ${foodInfo.protein} g\n" +
+                                "Carbohydrates: ${foodInfo.carbohydrate} g\n" +
+                                "Fats: ${foodInfo.fat} g\n" +
+                                "Sugar: ${foodInfo.sugar} g\n\n" +
+                                "Total Nutrition:\n" +
+                                "Total Calories: ${totalNutrition.totalCalories} kcal\n" +
+                                "Total Carbohydrates: ${totalNutrition.totalCarbohydrate} g\n" +
+                                "Total Protein: ${totalNutrition.totalProtein} g\n" +
+                                "Total Fats: ${totalNutrition.totalFat} g\n" +
+                                "Total Sugar: ${totalNutrition.totalSugar} g"
                     } else {
                         showToast("Failed to get valid response data")
                     }

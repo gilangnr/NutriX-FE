@@ -120,12 +120,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -172,7 +172,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -211,13 +211,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:textSize="16sp" />
+
                     </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -262,7 +265,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -308,6 +311,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:layout_marginEnd="20dp"
                     android:orientation="vertical">
 
                     <TextView

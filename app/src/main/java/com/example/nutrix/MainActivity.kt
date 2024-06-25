@@ -34,6 +34,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.ProgressNutrition
+import com.example.nutrix.models.Recomendation
 
 class MainActivity : AppCompatActivity() {
 
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set onClickListener for btnRecomendation
         btnRecomendation.setOnClickListener {
-            showRecommendationDialog()
+            showRecommendationDialog("d5790195-555d-42f1-807d-9752667e7fc2")
         }
     }
 
@@ -355,21 +356,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Method to show recommendation dialog
-    private fun showRecommendationDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.apply {
-            setTitle("Recommendation")
-            setMessage("Gilang ganteng.")
-            setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-        }
+    private fun showRecommendationDialog(userId: String) {
+        val api = RetrofitClient.instance
+        api.getRecomendation(userId).enqueue(object : Callback<Recomendation> {
+            override fun onResponse(call: Call<Recomendation>, response: Response<Recomendation>) {
+                if (response.isSuccessful) {
+                    val recommendation = response.body()
+                    if (recommendation != null) {
+                        val message = """
+                        #1 ${recommendation.data.food1.foodName} - ${recommendation.data.food1.information}
+                        
+                        #2 ${recommendation.data.food2.foodName} - ${recommendation.data.food2.information}
+                        
+                        #3 ${recommendation.data.food3.foodName} - ${recommendation.data.food3.information}
+                    """.trimIndent()
 
-        val alertDialog = alertDialogBuilder.create()
-        alertDialog.show()
+                        val alertDialogBuilder = AlertDialog.Builder(this@MainActivity)
+                        alertDialogBuilder.apply {
+                            setTitle("Recommendation")
+                            setMessage(message)
+                            setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            setNegativeButton("Cancel") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                        }
+
+                        val alertDialog = alertDialogBuilder.create()
+                        alertDialog.show()
+                    } else {
+                        showToast("Failed to get recommendation data")
+                    }
+                } else {
+                    showToast("Failed to get recommendation data")
+                }
+            }
+
+            override fun onFailure(call: Call<Recomendation>, t: Throwable) {
+                showToast("Error: ${t.message}")
+            }
+        })
     }
 
     // Method to convert Bitmap to Base64 string

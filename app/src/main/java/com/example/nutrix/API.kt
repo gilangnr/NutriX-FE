@@ -9,6 +9,7 @@ import com.example.nutrix.models.LoginResponse
 import com.example.nutrix.models.NutririonMax
 import com.example.nutrix.models.ProfileResponse
 import com.example.nutrix.models.ProgressNutrition
+import com.example.nutrix.models.Recomendation
 import com.example.nutrix.models.RegisterRequest
 import com.example.nutrix.models.RegisterResponse
 import retrofit2.Call
@@ -43,4 +44,7 @@ interface API {
 
     @GET("food/nutrition/progress/{userId}")
     fun getProgressNutrition(@Path("userId") userId: String): Call<ProgressNutrition>
+
+    @GET("food/recommendation/{userId}")
+    fun getRecomendation(@Path("userId") userId: String): Call<Recomendation>
 }

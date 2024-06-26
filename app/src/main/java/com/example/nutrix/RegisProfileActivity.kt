@@ -1,5 +1,6 @@
 package com.example.nutrix
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -44,7 +45,8 @@ class RegisProfileActivity : AppCompatActivity() {
         val allergies = editAllergies.text.toString().trim()
         val weight = editWeight.text.toString().trim().toFloatOrNull() ?: 0f
         val height = editHeight.text.toString().trim().toFloatOrNull() ?: 0f
-        val userId = "user-id-placeholder" // Ganti dengan ID pengguna yang sebenarnya
+        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", "") ?: ""
 
         if (gender.isEmpty() || dob.isEmpty() || weight <= 0 || height <= 0) {
             Toast.makeText(this, "Harap isi semua kolom dengan benar", Toast.LENGTH_SHORT).show()
@@ -62,7 +64,7 @@ class RegisProfileActivity : AppCompatActivity() {
                     val createProfileResponse = response.body()!!
                     if (createProfileResponse.status == 200) {
                         Toast.makeText(this@RegisProfileActivity, "Profil berhasil dibuat", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@RegisProfileActivity, MainActivity::class.java)
+                        val intent = Intent(this@RegisProfileActivity, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

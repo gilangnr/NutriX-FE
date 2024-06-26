@@ -1,5 +1,6 @@
 package com.example.nutrix
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -37,9 +38,6 @@ class LoginActivity : AppCompatActivity() {
         }
         btnLogin.setOnClickListener{
             login()
-//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
         }
     }
 
@@ -59,6 +57,11 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val loginResponse = response.body()!!
                     if (loginResponse.status == 200) {
+                        val userId = loginResponse.data.id
+                        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userId", userId)
+                        editor.apply()
                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)

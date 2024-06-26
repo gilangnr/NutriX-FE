@@ -28,6 +28,7 @@ import java.io.ByteArrayOutputStream
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.os.Build
 import android.util.Base64
 import android.util.Log
@@ -84,110 +85,143 @@ class MainActivity : AppCompatActivity() {
 
         // Set onClickListener for btnRecomendation
         btnRecomendation.setOnClickListener {
-            showRecommendationDialog("d5790195-555d-42f1-807d-9752667e7fc2")
+            // Ambil userId dari Shared Preferences
+            val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+            val userId = sharedPreferences.getString("userId", "") ?: ""
+
+            // Pastikan userId tidak kosong sebelum menampilkan dialog rekomendasi
+            if (userId.isNotEmpty()) {
+                showRecommendationDialog(userId)
+            } else {
+                showToast("User ID tidak tersedia")
+            }
         }
+
     }
 
     private fun setProgressNutrition() {
-        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
-        val api = RetrofitClient.instance
+        // Ambil userId dari Shared Preferences
+        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", "") ?: ""
+        // Pastikan userId tidak kosong sebelum memanggil API
+        if (userId.isNotEmpty()) {
+            val api = RetrofitClient.instance
 
-        api.getProgressNutrition(userId).enqueue(object : Callback<ProgressNutrition> {
-            override fun onResponse(
-                call: Call<ProgressNutrition>,
-                response: Response<ProgressNutrition>
-            ) {
-                if (response.isSuccessful) {
-                    val nutrition = response.body()
-                    if (nutrition != null) {
-                        val progressKarbo =
-                            findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
-                        val progressProtein =
-                            findViewById<CircularProgressBar>(R.id.progress_protein)
-                        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
-                        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
-                        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
+            api.getProgressNutrition(userId).enqueue(object : Callback<ProgressNutrition> {
+                override fun onResponse(
+                    call: Call<ProgressNutrition>,
+                    response: Response<ProgressNutrition>
+                ) {
+                    if (response.isSuccessful) {
+                        val nutrition = response.body()
+                        if (nutrition != null) {
+                            val progressKarbo =
+                                findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+                            val progressProtein =
+                                findViewById<CircularProgressBar>(R.id.progress_protein)
+                            val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
+                            val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
+                            val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
 
-                        val txtProgKarbo = findViewById<TextView>(R.id.txt_prog_karbohidrat)
-                        val txtProgProtein = findViewById<TextView>(R.id.txt_prog_protein)
-                        val txtProgLemak = findViewById<TextView>(R.id.txt_prog_lemak)
-                        val txtProgKalori = findViewById<TextView>(R.id.txt_prog_kalori)
-                        val txtProgGula = findViewById<TextView>(R.id.txt_prog_gula)
+                            val txtProgKarbo = findViewById<TextView>(R.id.txt_prog_karbohidrat)
+                            val txtProgProtein = findViewById<TextView>(R.id.txt_prog_protein)
+                            val txtProgLemak = findViewById<TextView>(R.id.txt_prog_lemak)
+                            val txtProgKalori = findViewById<TextView>(R.id.txt_prog_kalori)
+                            val txtProgGula = findViewById<TextView>(R.id.txt_prog_gula)
 
-                        progressKarbo.progress = nutrition.data.totalCarbohydrate
-                        progressProtein.progress = nutrition.data.totalProtein
-                        progressLemak.progress = nutrition.data.totalFat
-                        progressKalori.progress = nutrition.data.totalCalories
-                        progressGula.progress = nutrition.data.totalSugar
+                            progressKarbo.progress = nutrition.data.totalCarbohydrate
+                            progressProtein.progress = nutrition.data.totalProtein
+                            progressLemak.progress = nutrition.data.totalFat
+                            progressKalori.progress = nutrition.data.totalCalories
+                            progressGula.progress = nutrition.data.totalSugar
 
-                        txtProgKarbo.text = nutrition.data.totalCarbohydrate.toString() + "/"
-                        txtProgProtein.text = nutrition.data.totalProtein.toString() + "/"
-                        txtProgLemak.text = nutrition.data.totalFat.toString() + "/"
-                        txtProgKalori.text = nutrition.data.totalCalories.toString() + "/"
-                        txtProgGula.text = nutrition.data.totalSugar.toString() + "/"
+                            txtProgKarbo.text = nutrition.data.totalCarbohydrate.toString() + "/"
+                            txtProgProtein.text = nutrition.data.totalProtein.toString() + "/"
+                            txtProgLemak.text = nutrition.data.totalFat.toString() + "/"
+                            txtProgKalori.text = nutrition.data.totalCalories.toString() + "/"
+                            txtProgGula.text = nutrition.data.totalSugar.toString() + "/"
+                        }
+                    } else {
+                        showToast("Gagal mendapatkan data progress nutrisi")
                     }
-                } else {
-                    showToast("Gagal mendapatkan data progress nutrisi")
                 }
-            }
 
-            override fun onFailure(call: Call<ProgressNutrition>, t: Throwable) {
-                showToast("Error: ${t.message}")
-            }
+                override fun onFailure(call: Call<ProgressNutrition>, t: Throwable) {
+                    showToast("Error: ${t.message}")
+                }
 
-        })
+            })
+        } else {
+            showToast("User ID tidak tersedia")
+        }
     }
+
 
     private fun setNutritionProgressBarMax() {
-        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"//ganti ger
-        val api = RetrofitClient.instance
-        api.getTotalNutrition(userId).enqueue(object : Callback<NutririonMax> {
-            override fun onResponse(call: Call<NutririonMax>, response: Response<NutririonMax>) {
-                if (response.isSuccessful) {
-                    val nutrition = response.body()
-                    if (nutrition != null) {
-                        val progressKarbo =
-                            findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
-                        val progressProtein =
-                            findViewById<CircularProgressBar>(R.id.progress_protein)
-                        val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
-                        val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
-                        val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
+        // Ambil userId dari Shared Preferences
+        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", "") ?: ""
 
-                        val txtMaxKarbo = findViewById<TextView>(R.id.txt_max_karbohidrat)
-                        val txtMaxProtein = findViewById<TextView>(R.id.txt_max_protein)
-                        val txtMaxLemak = findViewById<TextView>(R.id.txt_max_lemak)
-                        val txtMaxKalori = findViewById<TextView>(R.id.txt_max_kalori)
-                        val txtMaxGula = findViewById<TextView>(R.id.txt_max_gula)
+        // Pastikan userId tidak kosong sebelum memanggil API
+        if (userId.isNotEmpty()) {
+            val api = RetrofitClient.instance
 
-                        progressKarbo.progressMax = nutrition.data.carbohydrate
-                        progressProtein.progressMax = nutrition.data.proteins
-                        progressLemak.progressMax = nutrition.data.fat
-                        progressKalori.progressMax = nutrition.data.calories
-                        progressGula.progressMax = nutrition.data.sugar
+            api.getTotalNutrition(userId).enqueue(object : Callback<NutririonMax> {
+                override fun onResponse(
+                    call: Call<NutririonMax>,
+                    response: Response<NutririonMax>
+                ) {
+                    if (response.isSuccessful) {
+                        val nutrition = response.body()
+                        if (nutrition != null) {
+                            val progressKarbo =
+                                findViewById<CircularProgressBar>(R.id.progress_karbohidrat)
+                            val progressProtein =
+                                findViewById<CircularProgressBar>(R.id.progress_protein)
+                            val progressLemak = findViewById<CircularProgressBar>(R.id.progress_lemak)
+                            val progressKalori = findViewById<CircularProgressBar>(R.id.progress_kalori)
+                            val progressGula = findViewById<CircularProgressBar>(R.id.progress_gula)
 
-                        txtMaxKarbo.text = nutrition.data.carbohydrate.toString()
-                        txtMaxProtein.text = nutrition.data.proteins.toString()
-                        txtMaxLemak.text = nutrition.data.fat.toString()
-                        txtMaxKalori.text = nutrition.data.calories.toString()
-                        txtMaxGula.text = nutrition.data.sugar.toString()
+                            val txtMaxKarbo = findViewById<TextView>(R.id.txt_max_karbohidrat)
+                            val txtMaxProtein = findViewById<TextView>(R.id.txt_max_protein)
+                            val txtMaxLemak = findViewById<TextView>(R.id.txt_max_lemak)
+                            val txtMaxKalori = findViewById<TextView>(R.id.txt_max_kalori)
+                            val txtMaxGula = findViewById<TextView>(R.id.txt_max_gula)
 
+                            progressKarbo.progressMax = nutrition.data.carbohydrate
+                            progressProtein.progressMax = nutrition.data.proteins
+                            progressLemak.progressMax = nutrition.data.fat
+                            progressKalori.progressMax = nutrition.data.calories
+                            progressGula.progressMax = nutrition.data.sugar
+
+                            txtMaxKarbo.text = nutrition.data.carbohydrate.toString()
+                            txtMaxProtein.text = nutrition.data.proteins.toString()
+                            txtMaxLemak.text = nutrition.data.fat.toString()
+                            txtMaxKalori.text = nutrition.data.calories.toString()
+                            txtMaxGula.text = nutrition.data.sugar.toString()
+
+                        }
+                    } else {
+                        showToast("Gagal mendapatkan data max nutrisi")
                     }
-                } else {
-                    showToast("Gagal mendapatkan data max nutrisi")
                 }
-            }
 
-            override fun onFailure(call: Call<NutririonMax>, t: Throwable) {
-                showToast("Error: ${t.message}")
-            }
+                override fun onFailure(call: Call<NutririonMax>, t: Throwable) {
+                    showToast("Error: ${t.message}")
+                }
 
-        })
+            })
+        } else {
+            showToast("User ID tidak tersedia")
+        }
     }
+
 
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
-        val userId = "6f1a1761-58c4-46fd-afe2-33ffc2ae4c81"  // Sesuaikan dengan userId yang sebenarnya
+        // Ambil userId dari Shared Preferences
+        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", "") ?: ""
 
         // Validasi base64Image, jika null atau kosong, tidak perlu melakukan request
         if (base64Image.isNullOrEmpty()) {
@@ -228,6 +262,8 @@ class MainActivity : AppCompatActivity() {
                                 "Total Fats: ${totalNutrition.totalFat} g\n" +
                                 "Total Sugar: ${totalNutrition.totalSugar} g"
 
+                        setProgressNutrition()
+
                     } else {
                         showToast("Failed to get valid response data")
                     }
@@ -250,6 +286,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
 
     private fun showProgressDialog(message: String) {
@@ -386,7 +423,7 @@ class MainActivity : AppCompatActivity() {
                         val alertDialog = alertDialogBuilder.create()
                         alertDialog.show()
                     } else {
-                        showToast("Failed to get recommendation data")
+                        showToast("kosong")
                     }
                 } else {
                     showToast("Failed to get recommendation data")

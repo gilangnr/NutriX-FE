@@ -1,8 +1,10 @@
 package com.example.nutrix
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nutrix.models.ProfileResponse
 import retrofit2.Call
@@ -41,43 +43,58 @@ class UserActivity : AppCompatActivity() {
 
 
     private fun fetchUserProfile() {
-        val userId = "6f1a1761-58c4-46fd-afe2-33ffc2ae4c81"
-        val api = RetrofitClient.instance
+        // Ambil userId dari Shared Preferences
+        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("userId", "") ?: ""
 
-        api.getProfiles(userId).enqueue(object : Callback<ProfileResponse> {
-            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
-                if (response.isSuccessful) {
-                    val profileResponse = response.body()
-                    val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
+        // Pastikan userId tidak kosong sebelum memanggil API
+        if (userId.isNotEmpty()) {
+            val api = RetrofitClient.instance
 
-                    profile?.let { actualProfile ->
-                        txtFullname.text = actualProfile.user?.name ?: "Data not available"
-                        txtEmail.text = actualProfile.user?.email ?: "Data not available"
-                        txtGender.text = actualProfile.gender ?: "Data not available"
-                        txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
-                        txtAllergies.text = actualProfile.allergies ?: "Data not available"
-                        txtWeight.text = actualProfile.weight.toString() ?: "Data not available"
-                        txtHeight.text = actualProfile.height.toString() ?: "Data not available"
+            api.getProfiles(userId).enqueue(object : Callback<ProfileResponse> {
+                override fun onResponse(
+                    call: Call<ProfileResponse>,
+                    response: Response<ProfileResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val profileResponse = response.body()
+                        val profile = profileResponse?.data // Assuming `data` is a property of ProfileResponse
+
+                        profile?.let { actualProfile ->
+                            txtFullname.text = actualProfile.user?.name ?: "Data not available"
+                            txtEmail.text = actualProfile.user?.email ?: "Data not available"
+                            txtGender.text = actualProfile.gender ?: "Data not available"
+                            txtDob.text = actualProfile.dateOfBirth ?: "Data not available"
+                            txtAllergies.text = actualProfile.allergies ?: "Data not available"
+                            txtWeight.text = actualProfile.weight?.toString() ?: "Data not available"
+                            txtHeight.text = actualProfile.height?.toString() ?: "Data not available"
+                        }
+                    } else {
+                        handleErrorResponse()
                     }
-                } else {
+                }
+
+                override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                     handleErrorResponse()
                 }
-            }
 
-            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                handleErrorResponse()
-            }
+                private fun handleErrorResponse() {
+                    txtFullname.text = "Gagal mendapatkan data"
+                    txtEmail.text = "Gagal mendapatkan data"
+                    txtGender.text = "Gagal mendapatkan data"
+                    txtDob.text = "Gagal mendapatkan data"
+                    txtAllergies.text = "Gagal mendapatkan data"
+                    txtWeight.text = "Gagal mendapatkan data"
+                    txtHeight.text = "Gagal mendapatkan data"
+                }
+            })
+        } else {
+            showToast("User ID tidak tersedia")
+        }
+    }
 
-            private fun handleErrorResponse() {
-                txtFullname.text = "Gagal mendapatkan data"
-                txtEmail.text = "Gagal mendapatkan data"
-                txtGender.text = "Gagal mendapatkan data"
-                txtDob.text = "Gagal mendapatkan data"
-                txtAllergies.text = "Gagal mendapatkan data"
-                txtWeight.text = "Gagal mendapatkan data"
-                txtHeight.text = "Gagal mendapatkan data"
-            }
-        })
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 

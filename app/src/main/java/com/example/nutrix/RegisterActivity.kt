@@ -1,5 +1,6 @@
 package com.example.nutrix
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -60,6 +61,11 @@ class RegisterActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val registerResponse = response.body()!!
                     if (registerResponse.status == 200) {
+                        val userId = registerResponse.data.id
+                        val sharedPreferences = getSharedPreferences("NutrixId", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("userId", userId)
+                        editor.apply()
                         Toast.makeText(this@RegisterActivity, "Registration Successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@RegisterActivity, RegisProfileActivity::class.java)
                         startActivity(intent)

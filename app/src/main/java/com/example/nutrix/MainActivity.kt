@@ -402,7 +402,7 @@ class MainActivity : AppCompatActivity() {
     // Method to convert Bitmap to Base64 string
     private fun fileToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }

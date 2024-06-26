@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
     // Method to send image to server
     private fun sendImageToServer(base64Image: String?) {
-        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"  // Sesuaikan dengan userId yang sebenarnya
+        val userId = "6f1a1761-58c4-46fd-afe2-33ffc2ae4c81"  // Sesuaikan dengan userId yang sebenarnya
 
         // Validasi base64Image, jika null atau kosong, tidak perlu melakukan request
         if (base64Image.isNullOrEmpty()) {
@@ -402,7 +402,7 @@ class MainActivity : AppCompatActivity() {
     // Method to convert Bitmap to Base64 string
     private fun fileToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }

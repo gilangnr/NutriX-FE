@@ -41,7 +41,7 @@ class UserActivity : AppCompatActivity() {
 
 
     private fun fetchUserProfile() {
-        val userId = "d5790195-555d-42f1-807d-9752667e7fc2"
+        val userId = "6f1a1761-58c4-46fd-afe2-33ffc2ae4c81"
         val api = RetrofitClient.instance
 
         api.getProfiles(userId).enqueue(object : Callback<ProfileResponse> {
